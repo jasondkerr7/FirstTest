@@ -34,4 +34,4 @@ jobs:
           pip install pandas
       - name: Run the test py
         run: |
-          testing_file_creation.py
+          python testing_file_creation.py
