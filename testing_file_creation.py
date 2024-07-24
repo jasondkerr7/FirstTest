@@ -6,4 +6,4 @@ t = pd.DataFrame({'Last Names':['Kerr','Kerr','Sichel','Vallido','Kerr','Sichel'
                   'Rankz':[1,1,1,1,2,3,2]
                     })
 
-t.to_csv('file_creation_test_kkvs_cron.csv')
+print('Cartman350')
