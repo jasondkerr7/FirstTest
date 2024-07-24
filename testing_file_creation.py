@@ -5,5 +5,6 @@ t = pd.DataFrame({'Last Names':['Kerr','Kerr','Sichel','Vallido','Kerr','Sichel'
                   'Money':[1,2,3,12,20,101,0.5],
                   'Rankz':[1,1,1,1,2,3,2]
                     })
+test = pd.read_csv('test_data/test.csv')
 
-print('Cartman350')
+print(test)
