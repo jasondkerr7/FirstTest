@@ -11,8 +11,10 @@ cred_json = os.environ['SERVICE_ACCOUNT_CREDENTIALS_JSON']
 counter = 0
 
 print('Starting')
-for x in cred_json:
-  print(x)
-  counter += 1
-  if counter >= 20:
-    break
+for i in range(0,7):
+  print(i,'-',cred_json[i])
+
+for i in range(0,7):
+  x = i * -1
+  print(x,'-',cred_json[x])
+  
