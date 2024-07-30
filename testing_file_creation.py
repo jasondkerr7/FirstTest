@@ -8,13 +8,10 @@ t = pd.DataFrame({'Last Names':['Kerr','Kerr','Sichel','Vallido','Kerr','Sichel'
                     })
 
 cred_json = os.environ['SERVICE_ACCOUNT_CREDENTIALS_JSON']
-counter = 0
-
-print('Starting')
-for i in range(0,7):
-  print(i,'-',cred_json[i])
-
-for i in range(0,7):
-  x = i * -1
-  print(x,'-',cred_json[x])
+s_char = cred_json.index('~~~')
+e_char = cred_json.index('%%%')
   
+test = eval(cred_json[s_char+3:e_char])
+print('Type of test::', type(test))
+print('Type of test key::', type(test['test1']))
+print('string of test2::', test['test2'])
