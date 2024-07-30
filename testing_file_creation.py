@@ -9,10 +9,10 @@ t = pd.DataFrame({'Last Names':['Kerr','Kerr','Sichel','Vallido','Kerr','Sichel'
 
 cred_json = os.environ['SERVICE_ACCOUNT_CREDENTIALS_JSON']
 counter = 0
+
+print('Starting')
 for x in cred_json:
   print(x)
   counter += 1
-  if counter >= 10:
+  if counter >= 20:
     break
-
-print(type(cred_json))
