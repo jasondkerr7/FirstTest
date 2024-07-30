@@ -9,4 +9,4 @@ t = pd.DataFrame({'Last Names':['Kerr','Kerr','Sichel','Vallido','Kerr','Sichel'
 
 cred_json = os.environ['SERVICE_ACCOUNT_CREDENTIALS_JSON']
 
-print(cred_json['client_id'][1:5])
+print(cred_json)
