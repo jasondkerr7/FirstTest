@@ -8,8 +8,5 @@ t = pd.DataFrame({'Last Names':['Kerr','Kerr','Sichel','Vallido','Kerr','Sichel'
                     })
 
 cred_json = os.environ['SERVICE_ACCOUNT_CREDENTIALS_JSON']
-secret_p = cred_json['client_id']
 
-print(secret_p)
-for x in secret_p:
-  print(x)
+print(type(cred_json))
