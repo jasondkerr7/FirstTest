@@ -31,12 +31,12 @@ options = webdriver.ChromeOptions()
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(service=service, options=options)
 # Access Website
-driver.get('https://www.hockey-reference.com/teams/CAR/2019.html')
+driver.get('https://www.pro-football-reference.com/teams/pit/2024.htm')
 # Beautiful Soup
 page_source = driver.page_source
 soup = BeautifulSoup(page_source)
 # Player Stats Table
-player_stats = pd.read_html(str(soup.find_all('table',{'id':'player_stats'})[0]))[0]
+player_stats = pd.read_html(str(soup.find_all('table',{'id':'rushing_and_receiving'})[0]))[0]
 player_stats.columns = [x[1] for x in player_stats.columns]
 
 # Write File
@@ -45,7 +45,7 @@ player_stats.to_csv(t_csv_stream, sep=";")
 
 # Upload File
 returned_fields="id, name, mimeType, webViewLink, exportLinks, parents"
-file_metadata = {'name': '2019 Canes.csv',
+file_metadata = {'name': '2024 Steelers.csv',
                 'parents':['1GTyaZ1tRX1Wrh9LpHGRNoGJo6MWLEqsQ']}
 media = MediaIoBaseUpload(t_csv_stream,
                         mimetype='text/csv')
