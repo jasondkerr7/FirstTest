@@ -23,7 +23,7 @@ scope = ['https://www.googleapis.com/auth/drive']
 credentials = service_account.Credentials.from_service_account_info(
                               info=service_account_cred, 
                               scopes=scope)
-service = build('drive', 'v3', credentials=credentials)
+ggl_drive = build('drive', 'v3', credentials=credentials)
 
 # Setup Connection
 service = Service()
@@ -49,5 +49,5 @@ file_metadata = {'name': '2019 Canes.csv',
                 'parents':['1GTyaZ1tRX1Wrh9LpHGRNoGJo6MWLEqsQ']}
 media = MediaIoBaseUpload(t_csv_stream,
                         mimetype='text/csv')
-file = service.files().create(body=file_metadata, media_body=media,
+file = ggl_drive.files().create(body=file_metadata, media_body=media,
                               fields=returned_fields).execute()
