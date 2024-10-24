@@ -8,6 +8,9 @@ from googleapiclient.http import MediaIoBaseDownload
 from googleapiclient.http import MediaIoBaseUpload
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from bs4 import BeautifulSoup
 
 # Prepare auth json for google connection
 cred_json = os.environ['SERVICE_ACCOUNT_CREDENTIALS_JSON']
@@ -22,22 +25,27 @@ credentials = service_account.Credentials.from_service_account_info(
                               scopes=scope)
 service = build('drive', 'v3', credentials=credentials)
 
-# Read in File
-url = 'https://drive.google.com/file/d/1PKDzrurOqfIDkdD8NK5edTBC3Hu1xkfg/view?usp=drive_link'
-path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
-game_log = pd.read_csv(path)
-
-# Changes
-game_log.loc[0,'Opp'] = 'CHA'
-game_log.loc[1,'Team'] = 'CHA'
+# Setup Connection
+service = Service()
+options = webdriver.ChromeOptions()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(service=service, options=options)
+# Access Website
+driver.get('https://www.hockey-reference.com/teams/CAR/2019.html')
+# Beautiful Soup
+page_source = driver.page_source
+soup = BeautifulSoup(page_source)
+# Player Stats Table
+player_stats = pd.read_html(str(soup.find_all('table',{'id':'player_stats'})[0]))[0]
+player_stats.columns = [x[1] for x in player_stats.columns]
 
 # Write File
 t_csv_stream = io.StringIO()
-game_log.to_csv(t_csv_stream, sep=";")
+player_stats.to_csv(t_csv_stream, sep=";")
 
 # Upload File
 returned_fields="id, name, mimeType, webViewLink, exportLinks, parents"
-file_metadata = {'name': 'test_fake.csv',
+file_metadata = {'name': '2019 Canes.csv',
                 'parents':['1GTyaZ1tRX1Wrh9LpHGRNoGJo6MWLEqsQ']}
 media = MediaIoBaseUpload(t_csv_stream,
                         mimetype='text/csv')
