@@ -41,6 +41,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas
           pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+          pip install selenium
+          pip install beautifulsoup4
       - name: Run the test py
         run: |
           python testing_file_creation.py
